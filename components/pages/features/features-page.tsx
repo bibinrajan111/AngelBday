@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "motion/react";
-import { Cake, Flower, MapPinned, PartyPopper } from "lucide-react";
+import { Candy, Drumstick, Flower, MapPinned, PartyPopper } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 
@@ -59,14 +59,14 @@ export function FeaturesPage({ mood }: { mood: string }) {
         icon: PartyPopper
       },
       {
-        title: "Favorite Things",
+        title: mood === "flowers" ? "Tulip Theme" : mood === "food" ? "Feast Theme" : "Chocolate Theme",
         description:
           mood === "flowers"
             ? "Red tulips lead this story, with yellow and pink petals dancing behind."
             : mood === "food"
               ? "Biriyani, chicken, and pork vibes — exactly your comfort celebration plate."
               : "Ferrero Rocher, Bounty, and Munch energy for your sweetest smile.",
-        icon: mood === "flowers" ? Flower : mood === "food" ? Cake : Cake
+        icon: mood === "flowers" ? Flower : mood === "food" ? Drumstick : Candy
       },
       {
         title: "Distance Means Nothing",

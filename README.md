@@ -1,6 +1,6 @@
 # Angel Birthday Interactive Site
 
-A modular, interactive birthday experience built with:
+A modular, response-driven birthday experience built with:
 
 - Next.js App Router + TypeScript
 - Tailwind CSS v4
@@ -18,11 +18,14 @@ npm run dev
 
 ## Modular structure
 
-Each interactive page has its own folder:
+Each page lives in its own folder for easy extension:
 
 - `components/pages/intro`
 - `components/pages/vibe`
 - `components/pages/features`
+- `components/pages/story`
+- `components/pages/chat`
+- `components/pages/promise`
 - `components/pages/final`
 
-This makes it easy to add new pages or modify one page without touching others.
+Chat data is stored separately in `data/chat-messages.ts` so you can add/edit messages easily.
