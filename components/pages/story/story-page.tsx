@@ -27,7 +27,7 @@ export function StoryPage() {
   return (
     <section className="space-y-6">
       <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 5</p>
+        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 4</p>
         <h2 className="text-3xl font-semibold text-white md:text-4xl">A little timeline of Angel</h2>
       </motion.div>
 

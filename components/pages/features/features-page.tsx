@@ -84,7 +84,7 @@ export function FeaturesPage({ mood }: { mood: string }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 4</p>
+        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 3</p>
         <h2 className="text-3xl font-semibold text-white md:text-4xl">Three reasons your day is magical</h2>
       </motion.div>
       <div className="grid gap-4 md:grid-cols-3">

@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { LenisProvider } from "@/components/shared/lenis-provider";
 import { IntroPage } from "@/components/pages/intro/intro-page";
 import { type AngelMood, VibePage } from "@/components/pages/vibe/vibe-page";
-import { GiftPage } from "@/components/pages/gift/gift-page";
 import { FeaturesPage } from "@/components/pages/features/features-page";
 import { StoryPage } from "@/components/pages/story/story-page";
 import { ChatPage } from "@/components/pages/chat/chat-page";
@@ -14,9 +13,9 @@ import { PromisePage } from "@/components/pages/promise/promise-page";
 import { FinalPage } from "@/components/pages/final/final-page";
 import { Button } from "@/components/ui/button";
 
-type Stage = "intro" | "vibe" | "gift" | "features" | "story" | "chat" | "promise" | "final";
+type Stage = "intro" | "vibe" | "features" | "story" | "chat" | "promise" | "final";
 
-const stageOrder: Stage[] = ["intro", "vibe", "gift", "features", "story", "chat", "promise", "final"];
+const stageOrder: Stage[] = ["intro", "vibe", "features", "story", "chat", "promise", "final"];
 
 export default function HomePage() {
   const [stage, setStage] = useState<Stage>("intro");
@@ -34,16 +33,11 @@ export default function HomePage() {
     setStage(next);
   };
 
-  const prevStage = () => {
-    const prev = stageOrder[Math.max(stageIndex - 1, 0)];
-    setStage(prev);
-  };
-
   return (
     <LenisProvider>
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8 md:px-6 md:py-12">
         <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
-          <span>Angel Birthday Story</span>
+          <span>Birthday Story</span>
           <span>{progress}</span>
         </div>
 
@@ -56,24 +50,47 @@ export default function HomePage() {
             transition={{ duration: 0.35 }}
           >
             {stage === "intro" && <IntroPage onNext={nextStage} />}
-            {stage === "vibe" && <VibePage selectedMood={mood} onPick={setMood} onNext={nextStage} />}
-            {stage === "gift" && <GiftPage mood={mood} />}
-            {stage === "features" && <FeaturesPage mood={mood} />}
-            {stage === "story" && <StoryPage />}
-            {stage === "chat" && <ChatPage />}
-            {stage === "promise" && <PromisePage />}
+            {stage === "vibe" && <VibePage onSelect={setMood} onAllViewed={nextStage} />}
+
+            {stage === "features" && (
+              <section className="space-y-6">
+                <FeaturesPage mood={mood} />
+                <div className="flex justify-center">
+                  <Button onClick={nextStage}>Continue →</Button>
+                </div>
+              </section>
+            )}
+
+            {stage === "story" && (
+              <section className="space-y-6">
+                <StoryPage />
+                <div className="flex justify-center">
+                  <Button onClick={nextStage}>Continue →</Button>
+                </div>
+              </section>
+            )}
+
+            {stage === "chat" && (
+              <section className="space-y-6">
+                <ChatPage />
+                <div className="flex justify-center">
+                  <Button onClick={nextStage}>Continue →</Button>
+                </div>
+              </section>
+            )}
+
+            {stage === "promise" && (
+              <section className="space-y-6">
+                <PromisePage />
+                <div className="flex justify-center">
+                  <Button onClick={nextStage}>Final page 💌</Button>
+                </div>
+              </section>
+            )}
+
             {stage === "final" && <FinalPage mood={mood} />}
           </motion.div>
         </AnimatePresence>
-
-        {stage !== "intro" && (
-          <div className="flex flex-wrap justify-center gap-3 pb-8">
-            <Button variant="outline" onClick={prevStage}>
-              ← Previous
-            </Button>
-            {stage !== "final" && <Button onClick={nextStage}>Next page →</Button>}
-          </div>
-        )}
       </main>
     </LenisProvider>
   );

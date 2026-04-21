@@ -23,7 +23,7 @@ export function FinalPage({ mood }: { mood: string }) {
     >
       <Card className="space-y-5 border-blue-200/30 p-7 md:p-10">
         <p className="inline-flex items-center gap-2 rounded-full bg-blue-500/15 px-4 py-1 text-xs uppercase tracking-[0.18em] text-blue-100">
-          <Stars className="h-3.5 w-3.5" /> Page 8 · Final Letter
+          <Stars className="h-3.5 w-3.5" /> Page 7 · Final Letter
         </p>
         <h2 className="text-3xl font-bold text-white md:text-5xl">Happy Birthday, Angel Reji 💙</h2>
         <p className="text-base leading-7 text-slate-200 md:text-lg">

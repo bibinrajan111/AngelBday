@@ -1,84 +1,115 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { CakeSlice, Flower2, Gift } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export type AngelMood = "flowers" | "cake" | "chocolate";
 
-const vibes = [
-  {
-    id: "flowers",
-    label: "Tulip Bouquet",
-    note: "Open a floral gift with red, yellow, and pink tulips.",
-    icon: Flower2
-  },
-  {
-    id: "cake",
-    label: "Birthday Cake",
-    note: "Open a cake gift with a candle and a birthday wish.",
-    icon: CakeSlice
-  },
-  {
-    id: "chocolate",
-    label: "Chocolate Box",
-    note: "Open a sweet gift box made just for you.",
-    icon: Gift
+const giftIds: AngelMood[] = ["flowers", "cake", "chocolate"];
+
+function GiftContent({ gift }: { gift: AngelMood }) {
+  if (gift === "flowers") {
+    return (
+      <Card className="space-y-4 p-6">
+        <h3 className="text-2xl font-semibold text-white">Tulip bouquet 🌷</h3>
+        <p className="text-slate-200">A cluster bouquet of red, yellow, and pink tulips for your birthday.</p>
+        <div className="grid grid-cols-3 gap-2 rounded-2xl bg-white/5 p-4 text-center text-4xl">
+          {Array.from({ length: 9 }).map((_, i) => (
+            <span key={i}>🌷</span>
+          ))}
+        </div>
+      </Card>
+    );
   }
-] as const;
+
+  if (gift === "cake") {
+    return <CakeGift />;
+  }
+
+  return (
+    <Card className="space-y-4 p-6">
+      <h3 className="text-2xl font-semibold text-white">Chocolate gift box 🍫</h3>
+      <p className="text-slate-200">A sweet gift box with your favorite chocolate mood.</p>
+      <div className="rounded-2xl bg-white/5 p-4">
+        <div className="grid grid-cols-4 gap-2 text-center text-3xl">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i}>{i % 2 === 0 ? "🍫" : "🎁"}</span>
+          ))}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function CakeGift() {
+  const [done, setDone] = useState(false);
+
+  return (
+    <Card className="space-y-4 p-6 text-center">
+      <h3 className="text-2xl font-semibold text-white">Birthday cake 🎂</h3>
+      <p className="text-slate-200">Make a wish and blow the candle.</p>
+      <div className="text-7xl">{done ? "🎂" : "🕯️🎂"}</div>
+      {!done ? (
+        <Button onClick={() => setDone(true)}>Blow the candle and cut the cake</Button>
+      ) : (
+        <p className="text-xl text-blue-100">Happy Birthday my love 🎉💙</p>
+      )}
+    </Card>
+  );
+}
 
 export function VibePage({
-  selectedMood,
-  onPick,
-  onNext
+  onAllViewed,
+  onSelect
 }: {
-  selectedMood: AngelMood;
-  onPick: (mood: AngelMood) => void;
-  onNext: () => void;
+  onAllViewed: () => void;
+  onSelect: (gift: AngelMood) => void;
 }) {
+  const [activeGift, setActiveGift] = useState<AngelMood | null>(null);
+  const [seen, setSeen] = useState<Record<AngelMood, boolean>>({ flowers: false, cake: false, chocolate: false });
+
+  const allSeen = useMemo(() => Object.values(seen).every(Boolean), [seen]);
+
+  const openGift = (gift: AngelMood) => {
+    setActiveGift(gift);
+    setSeen((prev) => ({ ...prev, [gift]: true }));
+    onSelect(gift);
+  };
+
   return (
     <section className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        className="space-y-2"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
         <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 2</p>
-        <h2 className="text-3xl font-semibold text-white md:text-4xl">Pick the gift you want to open 🎁</h2>
-        <p className="text-slate-300">Each gift will open on the next page. Nothing is shown before opening it.</p>
       </motion.div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        {vibes.map((vibe, index) => (
-          <motion.div
-            key={vibe.id}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: index * 0.08 }}
+        {giftIds.map((gift) => (
+          <button
+            key={gift}
+            type="button"
+            onClick={() => openGift(gift)}
+            className="rounded-3xl border border-white/20 bg-white/5 p-8 text-center transition hover:border-blue-300/50 hover:bg-white/10"
           >
-            <Card className="h-full p-5">
-              <vibe.icon className="mb-3 h-6 w-6 text-blue-300" />
-              <h3 className="text-lg font-medium text-white">{vibe.label}</h3>
-              <p className="mt-1 mb-4 text-sm text-slate-300">{vibe.note}</p>
-              <Button
-                variant={selectedMood === vibe.id ? "default" : "outline"}
-                className="w-full"
-                onClick={() => onPick(vibe.id)}
-              >
-                {selectedMood === vibe.id ? "Selected" : "Choose this gift"}
-              </Button>
-            </Card>
-          </motion.div>
+            <div className="text-5xl">🎁</div>
+            <p className="mt-3 text-sm text-slate-200">{seen[gift] ? "Opened" : "Tap to open"}</p>
+          </button>
         ))}
       </div>
 
-      <div className="flex justify-center">
-        <Button onClick={onNext}>Go open the gift →</Button>
-      </div>
+      {activeGift && (
+        <motion.div key={activeGift} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <GiftContent gift={activeGift} />
+        </motion.div>
+      )}
+
+      {allSeen && (
+        <div className="flex justify-center">
+          <Button onClick={onAllViewed}>Continue the story →</Button>
+        </div>
+      )}
     </section>
   );
 }
