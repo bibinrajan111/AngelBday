@@ -9,7 +9,7 @@ import { chatMessages } from "@/data/chat-messages";
 export function ChatPage() {
   return (
     <section className="space-y-5">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 5</p>
         <h2 className="flex items-center gap-2 text-3xl font-semibold text-white md:text-4xl">
           <MessageCircleHeart className="h-7 w-7 text-blue-300" />
@@ -26,8 +26,7 @@ export function ChatPage() {
             <motion.div
               key={`${message.time}-${index}`}
               initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
+              animate={{ opacity: 1, y: 0 }}
               className={message.from === "me" ? "flex justify-end" : "flex justify-start"}
             >
               <div

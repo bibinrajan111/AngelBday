@@ -17,8 +17,7 @@ export function FinalPage({ mood }: { mood: string }) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
+      animate={{ opacity: 1, y: 0 }}
       className="pb-12"
     >
       <Card className="space-y-5 border-blue-200/30 p-7 md:p-10">
