@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  --background: #020617;
+  --foreground: #f8fafc;
+}
+
+* {
+  border-color: rgb(148 163 184 / 0.15);
+}
+
+body {
+  background: radial-gradient(circle at top, #0f172a 0%, #020617 38%, #01020f 100%);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+.noise {
+  background-image: radial-gradient(rgb(255 255 255 / 0.08) 0.6px, transparent 0.6px);
+  background-size: 10px 10px;
+}
