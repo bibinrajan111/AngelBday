@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { LenisProvider } from "@/components/shared/lenis-provider";
 import { IntroPage } from "@/components/pages/intro/intro-page";
 import { type AngelMood, VibePage } from "@/components/pages/vibe/vibe-page";
+import { GiftPage } from "@/components/pages/gift/gift-page";
 import { FeaturesPage } from "@/components/pages/features/features-page";
 import { StoryPage } from "@/components/pages/story/story-page";
 import { ChatPage } from "@/components/pages/chat/chat-page";
@@ -13,9 +14,9 @@ import { PromisePage } from "@/components/pages/promise/promise-page";
 import { FinalPage } from "@/components/pages/final/final-page";
 import { Button } from "@/components/ui/button";
 
-type Stage = "intro" | "vibe" | "features" | "story" | "chat" | "promise" | "final";
+type Stage = "intro" | "vibe" | "gift" | "features" | "story" | "chat" | "promise" | "final";
 
-const stageOrder: Stage[] = ["intro", "vibe", "features", "story", "chat", "promise", "final"];
+const stageOrder: Stage[] = ["intro", "vibe", "gift", "features", "story", "chat", "promise", "final"];
 
 export default function HomePage() {
   const [stage, setStage] = useState<Stage>("intro");
@@ -56,6 +57,7 @@ export default function HomePage() {
           >
             {stage === "intro" && <IntroPage onNext={nextStage} />}
             {stage === "vibe" && <VibePage selectedMood={mood} onPick={setMood} onNext={nextStage} />}
+            {stage === "gift" && <GiftPage mood={mood} />}
             {stage === "features" && <FeaturesPage mood={mood} />}
             {stage === "story" && <StoryPage />}
             {stage === "chat" && <ChatPage />}

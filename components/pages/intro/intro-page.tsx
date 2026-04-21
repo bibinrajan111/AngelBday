@@ -21,7 +21,7 @@ export function IntroPage({ onNext }: { onNext: () => void }) {
           Angel&apos;s Birthday Journey
         </p>
         <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
-          Happy early birthday, <span className="text-blue-300">Angel (Annamma)</span>.
+          Happy early birthday, <span className="text-blue-300">Angel</span>.
         </h1>
         <p className="max-w-2xl text-base text-slate-200 md:text-lg">
           23 April 2026 is almost here, and this tiny interactive world was made to celebrate you — from Piravom to

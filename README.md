@@ -22,6 +22,7 @@ Each page lives in its own folder for easy extension:
 
 - `components/pages/intro`
 - `components/pages/vibe`
+- `components/pages/gift`
 - `components/pages/features`
 - `components/pages/story`
 - `components/pages/chat`

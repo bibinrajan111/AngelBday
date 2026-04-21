@@ -1,42 +1,33 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Beef, CakeSlice, Flower2 } from "lucide-react";
+import { CakeSlice, Flower2, Gift } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { FlowersView } from "@/components/pages/vibe/views/flowers-view";
-import { FoodView } from "@/components/pages/vibe/views/food-view";
-import { ChocolateView } from "@/components/pages/vibe/views/chocolate-view";
 
-export type AngelMood = "flowers" | "food" | "chocolate";
+export type AngelMood = "flowers" | "cake" | "chocolate";
 
-const moods = [
+const vibes = [
   {
     id: "flowers",
-    label: "A Tulip Mood",
-    note: "Red tulips first, yellow and pink right after.",
+    label: "Tulip Bouquet",
+    note: "Open a floral gift with red, yellow, and pink tulips.",
     icon: Flower2
   },
   {
-    id: "food",
-    label: "Biriyani + Meat",
-    note: "Biriyani with chicken or pork energy today.",
-    icon: Beef
+    id: "cake",
+    label: "Birthday Cake",
+    note: "Open a cake gift with a candle and a birthday wish.",
+    icon: CakeSlice
   },
   {
     id: "chocolate",
-    label: "Chocolate Time",
-    note: "Ferrero Rocher, Bounty, and Munch playlist.",
-    icon: CakeSlice
+    label: "Chocolate Box",
+    note: "Open a sweet gift box made just for you.",
+    icon: Gift
   }
 ] as const;
-
-function MoodPreview({ mood }: { mood: AngelMood }) {
-  if (mood === "flowers") return <FlowersView />;
-  if (mood === "food") return <FoodView />;
-  return <ChocolateView />;
-}
 
 export function VibePage({
   selectedMood,
@@ -56,41 +47,37 @@ export function VibePage({
         className="space-y-2"
       >
         <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 2</p>
-        <h2 className="text-3xl font-semibold text-white md:text-4xl">Choose Angel&apos;s birthday vibe</h2>
-        <p className="text-slate-300">Now each selection gives a different visual story before moving forward.</p>
+        <h2 className="text-3xl font-semibold text-white md:text-4xl">Pick the gift you want to open 🎁</h2>
+        <p className="text-slate-300">Each gift will open on the next page. Nothing is shown before opening it.</p>
       </motion.div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        {moods.map((mood, index) => (
+        {vibes.map((vibe, index) => (
           <motion.div
-            key={mood.id}
-            initial={{ opacity: 0, y: 30 }}
+            key={vibe.id}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: index * 0.08 }}
           >
             <Card className="h-full p-5">
-              <mood.icon className="mb-3 h-6 w-6 text-blue-300" />
-              <h3 className="text-lg font-medium text-white">{mood.label}</h3>
-              <p className="mt-1 mb-4 text-sm text-slate-300">{mood.note}</p>
+              <vibe.icon className="mb-3 h-6 w-6 text-blue-300" />
+              <h3 className="text-lg font-medium text-white">{vibe.label}</h3>
+              <p className="mt-1 mb-4 text-sm text-slate-300">{vibe.note}</p>
               <Button
-                variant={selectedMood === mood.id ? "default" : "outline"}
+                variant={selectedMood === vibe.id ? "default" : "outline"}
                 className="w-full"
-                onClick={() => onPick(mood.id)}
+                onClick={() => onPick(vibe.id)}
               >
-                {selectedMood === mood.id ? "Selected" : "Pick this"}
+                {selectedMood === vibe.id ? "Selected" : "Choose this gift"}
               </Button>
             </Card>
           </motion.div>
         ))}
       </div>
 
-      <motion.div key={selectedMood} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <MoodPreview mood={selectedMood} />
-      </motion.div>
-
       <div className="flex justify-center">
-        <Button onClick={onNext}>Continue with this vibe →</Button>
+        <Button onClick={onNext}>Go open the gift →</Button>
       </div>
     </section>
   );

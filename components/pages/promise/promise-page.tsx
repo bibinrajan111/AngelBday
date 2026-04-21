@@ -15,7 +15,7 @@ export function PromisePage() {
   return (
     <section className="space-y-5">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 6</p>
+        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 7</p>
         <h2 className="text-3xl font-semibold text-white md:text-4xl">What I promise you</h2>
       </motion.div>
       <div className="grid gap-4 md:grid-cols-3">

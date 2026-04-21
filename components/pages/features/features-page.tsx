@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "motion/react";
-import { Candy, Drumstick, Flower, MapPinned, PartyPopper } from "lucide-react";
+import { Candy, Flower, MapPinned, PartyPopper } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 
@@ -59,14 +59,14 @@ export function FeaturesPage({ mood }: { mood: string }) {
         icon: PartyPopper
       },
       {
-        title: mood === "flowers" ? "Tulip Theme" : mood === "food" ? "Feast Theme" : "Chocolate Theme",
+        title: mood === "flowers" ? "Tulip Theme" : mood === "cake" ? "Cake Theme" : "Chocolate Theme",
         description:
           mood === "flowers"
             ? "Red tulips lead this story, with yellow and pink petals dancing behind."
-            : mood === "food"
-              ? "Biriyani, chicken, and pork vibes — exactly your comfort celebration plate."
+            : mood === "cake"
+              ? "Birthday cake glow, candle wishes, and a sweet celebration moment just for you."
               : "Ferrero Rocher, Bounty, and Munch energy for your sweetest smile.",
-        icon: mood === "flowers" ? Flower : mood === "food" ? Drumstick : Candy
+        icon: mood === "flowers" ? Flower : mood === "cake" ? PartyPopper : Candy
       },
       {
         title: "Distance Means Nothing",
@@ -84,7 +84,7 @@ export function FeaturesPage({ mood }: { mood: string }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 3</p>
+        <p className="text-sm uppercase tracking-[0.24em] text-blue-200">Page 4</p>
         <h2 className="text-3xl font-semibold text-white md:text-4xl">Three reasons your day is magical</h2>
       </motion.div>
       <div className="grid gap-4 md:grid-cols-3">
